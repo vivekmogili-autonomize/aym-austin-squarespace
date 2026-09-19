@@ -100,3 +100,76 @@
   />
   
   </article>
+
+<style>
+  .mentor-tooltip {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    background: #fff;
+    border: 1px solid #222;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    padding: 14px 18px;
+    max-width: 320px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  .mentor-tooltip.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const gallery = document.querySelector(".gallery-mentor");
+    if (!gallery) return;
+
+    const tooltip = document.createElement("div");
+    tooltip.className = "mentor-tooltip";
+    document.body.appendChild(tooltip);
+
+    const OFFSET = 16;
+    let preferRight = false;
+
+    function positionTooltip(e) {
+      const rect = tooltip.getBoundingClientRect();
+      let x = preferRight
+        ? e.clientX + OFFSET
+        : e.clientX - OFFSET - rect.width;
+      let y = e.clientY + OFFSET;
+
+      if (preferRight && x + rect.width > window.innerWidth) {
+        x = e.clientX - OFFSET - rect.width;
+      } else if (!preferRight && x < 0) {
+        x = e.clientX + OFFSET;
+      }
+      if (y + rect.height > window.innerHeight) {
+        y = e.clientY - rect.height - OFFSET;
+      }
+
+      tooltip.style.left = x + "px";
+      tooltip.style.top = y + "px";
+    }
+
+    gallery.querySelectorAll("img").forEach(img => {
+      img.addEventListener("mouseenter", (e) => {
+        const imgRect = img.getBoundingClientRect();
+        preferRight = imgRect.left + imgRect.width / 2 < window.innerWidth / 2;
+
+        tooltip.innerHTML = img.getAttribute("data-hover") || "";
+        positionTooltip(e);
+        tooltip.classList.add("is-visible");
+      });
+
+      img.addEventListener("mousemove", positionTooltip);
+
+      img.addEventListener("mouseleave", () => {
+        tooltip.classList.remove("is-visible");
+      });
+    });
+  });
+</script>

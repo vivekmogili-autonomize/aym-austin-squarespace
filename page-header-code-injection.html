@@ -208,23 +208,3 @@
   }
 }
 </style>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const images = document.querySelectorAll(".gallery-mentor img");
-    const hoverText = document.getElementById("hoverText");
-
-    if (!hoverText || images.length === 0) return;
-
-    images.forEach(img => {
-      img.addEventListener("mouseover", () => {
-        const text = img.getAttribute("data-hover") || "";
-        hoverText.innerHTML = text;
-      });
-
-      img.addEventListener("mouseout", () => {
-        hoverText.innerHTML = "";
-      });
-    });
-  });
-</script>
