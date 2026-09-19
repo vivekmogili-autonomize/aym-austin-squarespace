@@ -1,0 +1,230 @@
+<style>
+
+  /*============================*/
+  /* Base Impact Theme Style */
+  /*============================*/
+
+  .impact-theme {
+    font-family: 'Poppins', Charcoal, sans-serif;
+    color: #fff; /* Use #fff if you want white text */
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(60px);
+    animation: fly-up 0.5s ease-out forwards;
+    animation-delay: 0.3s;
+  }
+
+  /* Variants */
+  .impact-theme--h1 { font-size: 150px; }
+  .impact-theme--h2 { font-size: 125px; color: #000; }
+  .impact-theme--mentors { font-size: 100px; color: #000; }
+  .impact-h2--newsletter { color: #ffffff; font-size:100px; text-align: center;}
+  .impact-theme--h3 { font-size: 40px; }
+  
+  /*============================*/
+  /* Paragraph Fonts*/
+  /*============================*/
+
+.Events-Paragraph {
+  font-family: 'Poppins', Helvetica, Arial, sans-serif;
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.6;
+  font-size: 1.4rem;
+  color: #000000;
+}
+  .Events-Paragraph--white {
+  color: #ffffff;
+}
+
+  /* Default Paragraph style in SquareSpace*/
+  .custom-paragraph {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /*============================*/
+  /* Ticker Styles */
+  /*============================*/
+  
+  .ticker-container {
+      width: 100%;
+      overflow: hidden;
+      background: #111;
+      color: white;
+      height: 65px;
+      display: flex;
+      align-items: center;
+    }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: scroll-left 20s linear infinite;
+      font-size: 1.125rem;
+      line-height: 1.2;
+      color: white;
+    }
+
+    .ticker-item {
+      display: inline-block;
+      margin-right: 3rem;
+    }
+
+  /*============================*/
+  /* Animation Keyframes */
+  /*============================*/
+  @keyframes fly-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+}
+  
+  /* Fade-in keyframes */
+  @keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+  
+.theme-button-atl {
+  display: block;
+  margin: 0 auto;
+  background-color: #FFFFFF;
+  color: #1d2e4b;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 3px 3px 0 #0f1b30;
+  transition: all 0.2s ease-in-out;
+
+  /* Start invisible */
+  opacity: 0;
+  animation: fade-in 0.5s ease-out forwards;
+  animation-delay: 0.3s;
+}
+
+.theme-button-atl--header {
+  margin:  0;
+}
+
+.theme-button-atl--blue {
+  background-color: #1D4F8B;
+  color: #FFFFFF;
+}
+  
+  .theme-button-atl:hover {
+    transform: translateY(-2px);
+    box-shadow: 6px 6px 0 #0f1b30;
+  }
+
+  /*============================*/
+  /* Mobile Styles */
+  /*============================*/
+  @media screen and (max-width: 768px) 
+  {
+    .impact-theme--h1 {
+    font-size: 60px;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+    .impact-theme--h2 {
+      font-size: 50px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .impact-theme--mentors {
+      font-size: 45px;
+      text-align: center;
+    }
+    .impact-theme--h3 {
+      font-size: 20px;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    .Events-Paragraph 
+    {
+    	text-align: center;
+      	font-size: 1rem;
+      	font-weight: 375;
+  	}
+
+    .theme-button-atl--header {
+      margin:  0 auto;
+    }
+  }
+  
+  /*============================*/
+  /* The Gallery Logic*/
+  /*============================*/
+.gallery-mentor {
+  --size: 100px;
+  display: grid;
+  grid-template-columns: repeat(8, var(--size)); /* 👈 8 columns now */
+  grid-auto-rows: var(--size);
+  margin-bottom: var(--size);
+  place-items: start center;
+  gap: 5px;
+  transform: scale(0.85);
+  transform-origin: top left;
+
+  &:has(:hover) img:not(:hover),
+  &:has(:focus) img:not(:focus) {
+    filter: brightness(0.5) contrast(0.5);
+  }
+
+  & img {
+    object-fit: cover;
+    width: calc(var(--size) * 2);   /* still 200px */
+    height: calc(var(--size) * 2);
+    clip-path: path("M90,10 C100,0 100,0 110,10 190,90 190,90 190,90 200,100 200,100 190,110 190,110 110,190 110,190 100,200 100,200 90,190 90,190 10,110 10,110 0,100 0,100 10,90Z");
+    transition: clip-path 0.25s, filter 0.75s;
+    grid-column: auto / span 2;
+    border-radius: 5px;
+  }
+
+  /* Offset every 7th, 8th, 9th image to simulate 3-per-row with a shift */
+  & img:nth-child(7n + 1) {
+    grid-column-start: 2; /* 👈 indent these rows */
+  }
+
+  & img:hover,
+  & img:focus {
+    clip-path: path("M0,0 C0,0 200,0 200,0 200,0 200,100 200,100 200,100 200,200 200,200 200,200 100,200 100,200 100,200 100,200 0,200 0,200 0,100 0,100 0,100 0,100 0,100Z");
+    z-index: 1;
+    transition: clip-path 0.25s, filter 0.25s;
+  }
+
+  & img:focus {
+    outline: 1px dashed black;
+    outline-offset: -5px;
+  }
+}
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const images = document.querySelectorAll(".gallery-mentor img");
+    const hoverText = document.getElementById("hoverText");
+
+    if (!hoverText || images.length === 0) return;
+
+    images.forEach(img => {
+      img.addEventListener("mouseover", () => {
+        const text = img.getAttribute("data-hover") || "";
+        hoverText.innerHTML = text;
+      });
+
+      img.addEventListener("mouseout", () => {
+        hoverText.innerHTML = "";
+      });
+    });
+  });
+</script>
